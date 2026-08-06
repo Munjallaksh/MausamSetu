@@ -55,6 +55,7 @@
 		"clsx": "2.1.1",
 		"deck.gl": "9.3.7",
 		"maplibre-gl": "6.1.0",
+		"nanostores": "^1.4.2",
 		"plotly.js-dist-min": "3.7.0",
 		"tailwind-merge": "3.4.0",
 		"zod": "4.4.3"
