@@ -1,0 +1,55 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+
+# Node
+node_modules/
+.svelte-kit/
+build/
+dist/
+.vite/
+
+# Data
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+*.nc
+*.grd
+*.h5
+*.hdf5
+*.zarr/
+*.tif
+
+# Models
+checkpoints/*
+!checkpoints/.gitkeep
+*.pt
+*.pth
+*.onnx
+*.safetensors
+
+# Runs
+runs/
+exports/
+*.db
+*.sqlite
+
+# Secrets
+.env
+.env.local
+.cdsapirc
+*.pem
+
+# Operating system
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/

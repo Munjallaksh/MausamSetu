@@ -1,0 +1,32 @@
+[project]
+name = "mausamsetu-api"
+version = "0.1.0"
+description = "FastAPI service for MausamSetu"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+  "mausamsetu-core",
+  "fastapi",
+  "uvicorn[standard]",
+  "websockets",
+  "python-multipart",
+  "rio-tiler",
+  "pillow",
+  "structlog",
+]
+
+[dependency-groups]
+dev = [
+  "pytest",
+  "pytest-asyncio",
+  "httpx",
+  "ruff",
+  "mypy",
+]
+
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/mausamsetu_api"]

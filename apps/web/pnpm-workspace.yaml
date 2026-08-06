@@ -1,0 +1,5 @@
+allowBuilds:
+  '@vaadin/vaadin-usage-statistics': false
+  esbuild: true
+minimumReleaseAgeExclude:
+  - '@lucide/svelte@1.29.0'

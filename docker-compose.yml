@@ -1,0 +1,27 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./checkpoints:/app/checkpoints
+    environment:
+      MAUSAMSETU_ENV: production
+      MAUSAMSETU_DATA_DIR: /app/data
+      MAUSAMSETU_CHECKPOINTS_DIR: /app/checkpoints
+
+  web:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.web
+    ports:
+      - "5173:80"
+    depends_on:
+      - api
+
+# GPU passthrough is intentionally not assumed. To enable it on a compatible
+# Linux host, install NVIDIA Container Toolkit and add the relevant Compose GPU
+# reservation/device configuration for the api service.

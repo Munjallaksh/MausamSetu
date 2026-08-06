@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v7
+        with:
+          version: "0.12.2"
+          enable-cache: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: pnpm
+          cache-dependency-path: apps/web/pnpm-lock.yaml
+      - uses: pnpm/action-setup@v4
+        with:
+          version: "11.17.0"
+      - name: Install Python workspace
+        run: uv sync --all-packages --group dev --locked
+      - name: Lint and type-check Python
+        run: |
+          uv run ruff check packages/core/src apps/api/src packages/core/tests apps/api/tests
+          uv run mypy
+      - name: Test Python (no GPU required)
+        run: uv run pytest -m "not gpu"
+      - name: Install frontend
+        run: pnpm --dir apps/web install --frozen-lockfile
+      - name: Lint, check, and test frontend
+        run: |
+          pnpm --dir apps/web lint
+          pnpm --dir apps/web check
+          pnpm --dir apps/web run test:unit -- --run
+      - name: Build frontend
+        run: pnpm --dir apps/web build

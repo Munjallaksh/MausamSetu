@@ -1,0 +1,37 @@
+[project]
+name = "mausamsetu-core"
+version = "0.1.0"
+description = "Core climate digital-twin interfaces for MausamSetu"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+  "torch>=2.5",
+  "numpy",
+  "scipy",
+  "pandas",
+  "polars",
+  "pyarrow",
+  "xarray",
+  "netCDF4",
+  "dask",
+  "rioxarray",
+  "rasterio",
+  "pyproj",
+  "shapely",
+  "geopandas",
+  "scikit-learn",
+  "pydantic>=2",
+  "pyyaml",
+  "structlog",
+  "loguru",
+  "tqdm",
+  "typer",
+  "rich",
+]
+
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/mausamsetu_core"]

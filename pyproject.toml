@@ -1,0 +1,44 @@
+[project]
+name = "mausamsetu-workspace"
+version = "0.1.0"
+description = "MausamSetu monorepo workspace"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+
+[tool.uv.workspace]
+members = ["packages/core", "apps/api"]
+
+[dependency-groups]
+dev = ["pre-commit==4.5.1"]
+
+[[tool.uv.index]]
+name = "pytorch-cu124"
+url = "https://download.pytorch.org/whl/cu124"
+explicit = true
+
+[tool.uv.sources]
+mausamsetu-core = { workspace = true }
+torch = [{ index = "pytorch-cu124" }]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+src = ["packages/core/src", "apps/api/src"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+mypy_path = ["packages/core/src", "apps/api/src"]
+packages = ["mausamsetu_core", "mausamsetu_api"]
+warn_unused_configs = true
+
+[tool.pytest.ini_options]
+testpaths = ["packages/core/tests", "apps/api/tests"]
+addopts = "-ra"
+markers = [
+  "gpu: test requires a CUDA-capable GPU and is skipped in CI",
+]
